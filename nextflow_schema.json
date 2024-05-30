@@ -7,7 +7,7 @@
     "url": "https://github.com/sheffield-bioinformatics-core/bacass",
     "type": "object",
     "definitions": {
-        "input: {
+        "input": {
             "title": "Input/output options",
             "type": "object",
             "fa_icon": "fas fa-terminal",

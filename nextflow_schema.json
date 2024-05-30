@@ -2,10 +2,12 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/bacass/master/nextflow_schema.json",
     "title": "nf-core/bacass pipeline parameters",
+    "workflow_title": "BACASS workflow",
     "description": "Simple bacterial assembly and annotation",
+    "url": "https://github.com/sheffield-bioinformatics-core/bacass",
     "type": "object",
     "definitions": {
-        "input_output_options": {
+        "input: {
             "title": "Input/output options",
             "type": "object",
             "fa_icon": "fas fa-terminal",

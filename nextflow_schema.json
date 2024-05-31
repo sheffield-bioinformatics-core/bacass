@@ -2,27 +2,24 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/bacass/master/nextflow_schema.json",
     "title": "nf-core/bacass pipeline parameters",
-    "workflow_title": "BACASS workflow",
     "description": "Simple bacterial assembly and annotation",
-    "url": "https://github.com/sheffield-bioinformatics-core/bacass",
     "type": "object",
     "definitions": {
-        "input": {
+        "input_output_options": {
             "title": "Input/output options",
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": "input",
             "properties": {
                 "input": {
                     "type": "string",
                     "exist": true,
                     "mimetype": "text/tsv",
-                    "input": "file-path",
                     "fa_icon": "fas fa-dna",
                     "description": "Path to tab-separated sample sheet",
+                    "format": "file-path",
                     "help_text": "Path to sample sheet, either tab-separated (.tsv), comma-separated (.csv), or in YAML format (.yml/.yaml), that points to compressed fastq files.\n\nThe sample sheet must have six tab-separated columns/entries with the following headers: \n- `ID` (required): Unique sample IDs, must start with a letter, and can only contain letters, numbers or underscores\n- `R1` (optional): Paths to (forward) reads zipped FastQ files\n- `R2` (optional): Paths to reverse reads zipped FastQ files, required if the data is paired-end\n- `LongFastQ` (optional): Paths to long reads zipped FastQ files\n- `Fast5` (optional): Paths to the directory containing FAST5 files\n- `GenomeSize` (optional): A number (including decimals) ending with 'm', representing genome size.\n\n Please be aware that files will be required based on the chosen assembly type specified with the '--assembly_type' option, which can be set to one of the following values: ['short', 'long', 'hybrid'].`",
-                    "schema": "assets/schema_input.json"
+                    "schema": "./assets/schema_input.json"
                 },
                 "outdir": {
                     "type": "string",
@@ -33,6 +30,7 @@
                 "email": {
                     "type": "string",
                     "description": "Email address for completion summary.",
+                    "default": "m.j.dunning@sheffield.ac.uk",
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
@@ -175,7 +173,7 @@
                 },
                 "dfast_config": {
                     "type": "string",
-                    "default": "assets/test_config_dfast.py",
+                    "default": "https://raw.githubusercontent.com/nf-core/bacass/master/assets/test_config_dfast.py",
                     "description": "Specifies a configuration file for the [DFAST](https://github.com/nigyta/dfast_core) annotation method.",
                     "help_text": "If you want to know how to create your config file, please refer to the [DFAST](https://github.com/nigyta/dfast_core) readme on how to create one.  The default config (`assets/test_config_dfast.py`) is just included for testing, so if you want to annotate using DFAST, you have to create a config!"
                 }
@@ -190,8 +188,8 @@
             "properties": {
                 "skip_kraken2": {
                     "type": "boolean",
-                    "default": true,
                     "fa_icon": "fas fa-forward",
+                    "default": true,
                     "description": "Skip running Kraken2 classifier on reads."
                 },
                 "skip_annotation": {
@@ -423,7 +421,7 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/input"
+            "$ref": "#/definitions/input_output_options"
         },
         {
             "$ref": "#/definitions/qc_and_trim"
